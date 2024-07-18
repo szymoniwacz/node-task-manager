@@ -1,4 +1,5 @@
 const Task = require('../models/Task');
+const socket = require('../socket');
 
 exports.getTasks = async (req, res) => {
   try {
@@ -18,6 +19,7 @@ exports.createTask = async (req, res) => {
       description
     });
     const task = await newTask.save();
+    socket.getIo().emit('newTask', task);  // Emit event
     res.json(task);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -36,6 +38,7 @@ exports.updateTask = async (req, res) => {
     task.description = description || task.description;
     task.completed = completed !== undefined ? completed : task.completed;
     await task.save();
+    socket.getIo().emit('updateTask', task);  // Emit event
     res.json(task);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -50,6 +53,7 @@ exports.deleteTask = async (req, res) => {
       return res.status(404).json({ message: 'Task not found' });
     }
     await task.remove();
+    socket.getIo().emit('deleteTask', { id });  // Emit event
     res.json({ message: 'Task removed' });
   } catch (err) {
     res.status(500).json({ error: err.message });
