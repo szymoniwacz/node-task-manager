@@ -2,6 +2,20 @@
 
 A task management application built with Node.js, Express, MongoDB, and Socket.io. This application allows users to sign up, log in, create, update, and delete tasks. It also supports real-time updates using Socket.io.
 
+> **Note:** This is a sandbox/demo application for practicing Node.js API, CRUD, JWT authentication, and Socket.io real-time features. Not intended for production use.
+
+## Project Status
+
+:construction: In progress – made for learning and demo purposes only.
+
+## Tech Stack
+
+- Node.js
+- Express
+- MongoDB
+- Socket.io
+- JWT (JSON Web Token)
+
 ## Features
 
 - User authentication with JWT
